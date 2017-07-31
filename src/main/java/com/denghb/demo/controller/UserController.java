@@ -1,6 +1,7 @@
 package com.denghb.demo.controller;
 
 import com.denghb.demo.domain.User;
+import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,7 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * Created by denghb on 2017/7/31.
  */
+@Api("用户")
 @Controller
 @RequestMapping("/user")
 public class UserController {
