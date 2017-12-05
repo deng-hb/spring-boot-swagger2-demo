@@ -3,6 +3,7 @@ package com.denghb.demo.controller;
 import com.denghb.demo.domain.User;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -59,6 +61,30 @@ public class UserController {
         user.setId(2L);
         user.setName("denghb2");
         user.setEmail("i<at>denghb.com");
+        users.put(user.getId(), user);
+        return "ok";
+    }
+
+
+    @ApiOperation(value = "新增用户", notes = "")
+    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "id", value = "ID", required = true, dataType = "Long", paramType = "form"),
+            @ApiImplicitParam(name = "name", value = "姓名", required = true, dataType = "String", paramType = "form"),
+            @ApiImplicitParam(name = "email", value = "邮箱", required = true, dataType = "String", paramType = "form")
+    })
+    @ResponseBody
+    public String add(HttpServletRequest request) {
+
+        // , long id, String name, String email
+        String id = request.getParameter("id");
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+
+        User user = new User();
+        user.setId(Long.parseLong(id));
+        user.setName(name);
+        user.setEmail(email);
         users.put(user.getId(), user);
         return "ok";
     }
