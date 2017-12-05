@@ -59,6 +59,7 @@ public class UserController {
         user.setId(2L);
         user.setName("denghb2");
         user.setEmail("i<at>denghb.com");
+        users.put(user.getId(), user);
         return "ok";
     }
 }
